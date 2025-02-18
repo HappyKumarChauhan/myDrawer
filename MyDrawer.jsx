@@ -98,9 +98,8 @@ const FavoritesScreen = () => (
 );
 
 // Main Navigator
-const AppNavigator = () => {
+const MyDrawer = () => {
   return (
-    <NavigationContainer>
       <Drawer.Navigator
         drawerContent={(props) => <CustomDrawerContent {...props} />}
         screenOptions={{
@@ -117,7 +116,6 @@ const AppNavigator = () => {
         <Drawer.Screen name="Favorites" component={FavoritesScreen} />
         <Drawer.Screen name="Settings" component={SettingsScreen} />
       </Drawer.Navigator>
-    </NavigationContainer>
   );
 };
 
@@ -194,4 +192,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppNavigator;
+export default MyDrawer;
