@@ -28,8 +28,8 @@ const CustomDrawerContent = (props) => {
           source={{ uri: 'https://avatars.githubusercontent.com/u/185829049?v=4' }}
           style={styles.profileImage}
         />
-        <Text style={styles.profileName}>Happy Chauhan</Text>
-        <Text style={styles.profileEmail}>happychauhan@flash.co</Text>
+        <Text style={styles.profileName}>XYZ</Text>
+        <Text style={styles.profileEmail}>XYZ@gmail.com</Text>
       </LinearGradient>
 
       <DrawerContentScrollView {...props}>
@@ -82,6 +82,7 @@ const SettingsScreen = () => (
 const ProfileScreen = () => (
   <View style={styles.screenContainer}>
     <Text style={styles.screenTitle}>Profile Screen</Text>
+    <Button title="Go to Personal Details" onPress={() => navigation.navigate('PersonalDetails')} />
   </View>
 );
 

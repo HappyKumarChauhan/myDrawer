@@ -5,7 +5,11 @@ import { Text, View } from 'react-native';
 import SignUpScreen from '../screens/SignUpScreen';
 import LoginScreen from '../screens/LoginScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
-import MyDrawer from '../../MyDrawer';
+import MyDrawer from './MyDrawer';
+import PersonalDetailsScreen from '../screens/PersonalDetailsScreen';
+import KYCDetailsScreen from '../screens/KYCScreen';
+import PropertyDetailsScreen from '../screens/PropertyDetailsScreen';
+import UploadScreen from '../screens/UploadScreen';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +22,11 @@ const AppNavigator = () => {
           <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Dashboard" component={MyDrawer} options={{ headerShown: false }} />
           <Stack.Screen name="LogIn" component={LoginScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="PersonalDetails" component={PersonalDetailsScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="KYCDetails" component={KYCDetailsScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="PropertyDetails" component={PropertyDetailsScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="UploadScreen" component={UploadScreen} options={{ headerShown: false }} />
+
         </Stack.Navigator>
       </NavigationContainer>
   );

@@ -77,14 +77,16 @@ const LogInScreen = ({ navigation }) => {
               <Text style={{ color: 'black' }}>Remember Me</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => { navigation.navigate('ForgotPassword') }}
+              onPress={() => { navigation.navigate('PersonalDetails') }}
             >
               <Text style={[styles.forgotPasswordText, { color: 'blue' }]}>Forgot Password</Text>
             </TouchableOpacity>
           </View>
 
           {/* login button  */}
-          <PrimaryButton title="Log In" handler={handleLogin} />
+          <PrimaryButton title="Log In" handler={handleLogin}
+         
+          />
 
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 15 }}>
             <View style={{ height: 1, width: '30%' }}></View>

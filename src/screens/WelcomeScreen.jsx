@@ -9,7 +9,7 @@ const WelcomeScreen = ({ navigation }) => {
             source={{ uri: 'https://cdn.decoist.com/wp-content/uploads/2015/08/Upholstered-daybed-for-the-contemporary-home-office.jpg' }}
             style={styles.background}
         >
-            <LinearGradient colors={['rgba(75, 0, 130,0.5)','rgba(0, 0, 128,0.5)']} style={styles.overlay}>
+            <LinearGradient colors={['rgba(50, 65, 75, 0.7)', 'rgba(60, 100, 110, 0.7)']} style={styles.overlay}>
                 <View style={styles.main}>
                     <Text style={[styles.primaryHeading]}>Connect, Create and Collaborate</Text>
                     <Text style={[styles.secondaryHeading]}>The ultimate Co-working experience</Text>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        height: 58,
+        height: 54,
         borderRadius: 10,
         paddingHorizontal: 10,
     },
