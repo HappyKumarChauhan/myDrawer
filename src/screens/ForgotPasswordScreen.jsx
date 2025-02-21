@@ -7,7 +7,7 @@ import PrimaryButton from '../components/PrimaryButton';
 const ForgotPasswordScreen = ({ navigation }) => {
     const { colors } = useContext(ThemeContext)
     const sendHandler = () => {
-        navigation.navigate('Verification')
+        navigation.navigate('VerificationCode')
     }
     return (
         <ImageBackground
@@ -30,7 +30,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
                     {/* Send Code button  */}
                     <PrimaryButton title="Send Code" handler={sendHandler} />
 
-                    <TouchableOpacity onPress={() => { navigation.navigate('VerificationCode') }} style={styles.backButton}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('LogIn') }} style={styles.backButton}>
                         <Text style={[styles.backButtonText, { color: colors.linkColor }]}>Back to LogIn</Text>
                     </TouchableOpacity>
                 </View>

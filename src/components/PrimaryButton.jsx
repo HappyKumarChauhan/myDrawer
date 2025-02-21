@@ -1,13 +1,15 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useContext } from 'react'
+import ThemeContext from '../theme/ThemeContext'
 const PrimaryButton = ({title,handler}) => {
+    const { colors } = useContext(ThemeContext)
 
     return (
         <TouchableOpacity
             onPress={handler}
-            style={[styles.button]}
+            style={[styles.button, { backgroundColor: colors.buttonBg }]}
         >
-            <Text style={[styles.buttonText]}>{title}</Text>
+            <Text style={[styles.buttonText, { color: colors.buttonText }]}>{title}</Text>
         </TouchableOpacity>
     )
 }

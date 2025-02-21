@@ -12,7 +12,7 @@ const ResetPasswordScreen = ({ navigation }) => {
     const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false); // State for confirm password visibility
 
     const createHandler=()=>{
-        navigation.navigate('PasswordSuccessScreen')
+        navigation.navigate('PasswordSuccess')
     }
 
     return (

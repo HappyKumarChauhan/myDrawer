@@ -15,7 +15,7 @@ const KYCDetailsScreen = ({ navigation }) => {
                 <Text style={[styles.topBarTitle, { color: colors.color, borderBottomColor: colors.color }]}>KYC Details</Text>
                 <TouchableOpacity style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}
                 onPress={() => navigation.navigate('Notifications')}>
-                    <Icon name="notifications-none" size={24} color="black" />
+                    <Icon name="notifications-none" size={24} color={colors.color} />
                 </TouchableOpacity>
             </View>
 
@@ -61,7 +61,7 @@ const KYCDetailsScreen = ({ navigation }) => {
 
             {/* Submit Button */}
             <TouchableOpacity
-                onPress={() => { navigation.navigate('PropertyDetails') }}
+                onPress={() => { navigation.navigate('LogIn') }}
                 style={[styles.submitButton, { backgroundColor: colors.buttonBg }]}>
                 <Text style={[styles.submitButtonText, { color: colors.buttonText }]}>Submit</Text>
             </TouchableOpacity>

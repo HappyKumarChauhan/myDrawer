@@ -8,7 +8,7 @@ const VerificationScreen = ({ navigation }) => {
     const [code, setCode] = useState(['', '', '', '']);
     const inputRefs = useRef([]);
     const handleVerification=()=>{
-        navigation.navigate('ResetPasswordScreen')
+        navigation.navigate('ResetPassword')
     }
 
     const handleCodeChange = (index, value) => {
@@ -62,7 +62,7 @@ const VerificationScreen = ({ navigation }) => {
             {/* Resend Code Text */}
             <View style={styles.resendContainer}>
                 <Text style={[styles.resendText,{color:colors.secondaryColor}]}>Didn't you receive any code?</Text>
-                <TouchableOpacity onPress={() => { navigation.navigate('ResetPassword') }}>
+                <TouchableOpacity onPress={() => {  }}>
                     <Text style={[styles.resendLink,{color:colors.linkColor}]}>Resend Code</Text>
                 </TouchableOpacity>
             </View>

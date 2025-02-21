@@ -10,11 +10,11 @@ const QRCodeScreen = ({ navigation }) => {
     <View style={[styles.container, { backgroundColor: colors.background }]}> 
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.iconButton} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]} onPress={() => navigation.goBack()}>
           <Icon name="keyboard-arrow-left" size={24} color={colors.color} />
         </TouchableOpacity>
         <Text style={[styles.headerTitle, { color: colors.color }]}>QR Code</Text>
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
           <Icon name="notifications-none" size={24} color={colors.color} />
         </TouchableOpacity>
       </View>
@@ -34,7 +34,7 @@ const QRCodeScreen = ({ navigation }) => {
           <Icon name="photo-camera" size={24} color={'white'} style={styles.cameraIcon} />
         </View>
         <Text style={[styles.scanText, { color: colors.color }]}>Scan QR Code For Booking</Text>
-        <Text style={[styles.description, { color: colors.subtext }]}>
+        <Text style={[styles.description, {color:colors.secondaryColor}]}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Text>
       </View>
@@ -42,27 +42,27 @@ const QRCodeScreen = ({ navigation }) => {
       {/* OR Text with Lines */}
       <View style={styles.orContainer}>
         <View style={styles.line} />
-        <Text style={styles.orText}>OR</Text>
+        <Text style={[styles.orText, {color:colors.secondaryColor}]}>OR</Text>
         <View style={styles.line} />
       </View>
 
       {/* OTP Section */}
       <View style={styles.otpContainer}>
-        <View style={styles.inputContainer}>
+        <View style={[styles.inputContainer, { backgroundColor: colors.secondaryBg }]}>
           <Icon name="verified" size={20} color={colors.iconColor} style={styles.inputIcon} />
           <TextInput 
             placeholder="Enter OTP" 
-            placeholderTextColor={colors.subtext} 
+            placeholderTextColor={colors.secondaryColor} 
             style={[styles.input, { color: colors.color }]} 
           />
         </View>
         <TouchableOpacity
         onPress={() => navigation.navigate('ForgotPassword')}
-         style={[styles.otpButton, { backgroundColor: colors.buttonBg }]}> 
-          <Text style={styles.otpButtonText}>Get OTP</Text>
+         style={[styles.otpButton, {backgroundColor:colors.buttonBg}]}> 
+          <Text style={[styles.otpButtonText, { color: colors.buttonText }]}>Get OTP</Text>
         </TouchableOpacity>
         <Text style={styles.resendText}>
-          Didn’t receive any code? <Text style={styles.resendLink}>Resend Code</Text>
+          Didn’t receive any code? <Text style={[styles.resendLink, {color:colors.linkColor}]}>Resend Code</Text>
         </Text>
       </View>
     </View>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   input: { flex: 1, fontSize: 16 },
 
   otpButton: { marginTop: 20, paddingVertical: 12, width: "100%", borderRadius: 8 }, // Full width button
-  otpButtonText: { color: "white", fontWeight: "bold", textAlign: "center" },
+  otpButtonText: {fontWeight: "bold", textAlign: "center" },
 
   resendText: { marginTop: 10, color: "gray" },
   resendLink: { color: "blue", fontWeight: "bold" }

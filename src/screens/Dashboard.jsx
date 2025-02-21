@@ -23,11 +23,11 @@ const DashboardScreen = ({ navigation }) => {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}> 
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.iconButton}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
           <Icon name="keyboard-arrow-left" size={24} color={colors.iconColor} />
         </TouchableOpacity>
         <Text style={[styles.headerTitle, { color: colors.color }]}>Dashboard</Text>
-        <TouchableOpacity style={styles.iconButton}
+        <TouchableOpacity style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}
         onPress={() => navigation.navigate('Notifications')}>
           <Icon name="notifications-none" size={24} color={colors.iconColor} />
         </TouchableOpacity>

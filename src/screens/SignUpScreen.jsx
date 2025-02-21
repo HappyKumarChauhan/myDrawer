@@ -1,10 +1,12 @@
 import React, { useContext, useState, } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ImageBackground, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
 import PrimaryButton from '../components/PrimaryButton';
+import ThemeContext from '../theme/ThemeContext';
 
 const SignUpScreen = ({ navigation }) => {
-
+  const {colors}=useContext(ThemeContext)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,7 +29,7 @@ const SignUpScreen = ({ navigation }) => {
     //     console.error('Error:', error.response?.data || error.message);
     //     Alert.alert('Error', 'Failed to create account. Please try again.');
     // }
-    console.log("form submitted")
+    navigation.navigate('PersonalDetails')
   };
 
   // Placeholder functions for Google and Apple sign-in
@@ -48,102 +50,102 @@ const SignUpScreen = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={{ uri: 'https://cdn.decoist.com/wp-content/uploads/2015/08/Upholstered-daybed-for-the-contemporary-home-office.jpg' }}
-      style={styles.background}
-    >
-      <View style={styles.overlay}>
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 10 }}>
-          <TouchableOpacity
-            onPress={() => { navigation.navigate('Dashboard') }}
-            style={{ backgroundColor: 'gray', borderRadius: 5, marginRight: 5 }}>
-            <Icon name='keyboard-double-arrow-right' size={30} color={'black'} />
-          </TouchableOpacity>
-        </View>
-        <View style={[styles.main]}>
-          <Text style={[styles.title]}>Sign Up</Text>
-          <View style={styles.inputContainer}>
-            <Icon name="person-outline" size={30} color="black" />
-            <TextInput
-              style={styles.input}
-              placeholderTextColor="#606060"
-              placeholder="Name"
-              value={formData.name}
-              onChangeText={(text) => handleInputChange('name', text)}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Icon name="mail" size={30} color="black" />
-            <TextInput
-              style={styles.input}
-              placeholderTextColor="#606060"
-              placeholder="Email"
-              value={formData.email}
-              onChangeText={(text) => handleInputChange('email', text)}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Icon name="phone" size={30} color="black" />
-            <TextInput
-              style={styles.input}
-              placeholderTextColor="#606060"
-              placeholder="Phone"
-              value={formData.phoneNumber}
-              onChangeText={(text) => handleInputChange('phoneNumber', text)}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Icon name="lock" size={30} color="black" />
-            <TextInput
-              style={styles.input}
-              placeholderTextColor="#606060"
-              placeholder="Password"
-              secureTextEntry={!showPassword} // Toggle password visibility
-              value={formData.password}
-              onChangeText={(text) => handleInputChange('password', text)}
-            />
-            <TouchableOpacity
-              style={styles.eyeButton}
-              onPress={() => setShowPassword(!showPassword)} // Toggle the password visibility
-            >
-              <Icon
-                name={showPassword ? "visibility" : "visibility-off"}
-                size={24}
-                color="black"
-              />
-            </TouchableOpacity>
-          </View>
+            source={{ uri: 'https://cdn.decoist.com/wp-content/uploads/2015/08/Upholstered-daybed-for-the-contemporary-home-office.jpg' }}
+            style={styles.background}
+        >
+            <View style={styles.overlay}>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 10 }}>
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('Dashboard') }}
+                        style={{ backgroundColor: 'gray', borderRadius: 5, marginRight: 5 }}>
+                        <Icon name='keyboard-double-arrow-right' size={30} color={'black'} />
+                    </TouchableOpacity>
+                </View>
+                <View style={[styles.main, { backgroundColor: colors.background }]}>
+                    <Text style={[styles.title, { color: colors.color }]}>Sign Up</Text>
+                    <View style={[styles.inputContainer, { backgroundColor: colors.secondaryBg }]}>
+                        <Icon name="person-outline" size={30} color={colors.color} />
+                        <TextInput
+                            style={[styles.input, { color: colors.color }]}
+                            placeholderTextColor={colors.secondaryColor}
+                            placeholder="Name"
+                            value={formData.name}
+                            onChangeText={(text) => handleInputChange('name', text)}
+                        />
+                    </View>
+                    <View style={[styles.inputContainer, { backgroundColor: colors.secondaryBg }]}>
+                        <Icon name="mail" size={30} color={colors.color} />
+                        <TextInput
+                            style={[styles.input, { color: colors.color }]}
+                            placeholderTextColor={colors.secondaryColor}
+                            placeholder="Email"
+                            value={formData.email}
+                            onChangeText={(text) => handleInputChange('email', text)}
+                        />
+                    </View>
+                    <View style={[styles.inputContainer, { backgroundColor: colors.secondaryBg }]}>
+                        <Icon name="phone" size={30} color={colors.color} />
+                        <TextInput
+                            style={[styles.input, { color: colors.color }]}
+                            placeholderTextColor={colors.secondaryColor}
+                            placeholder="Phone"
+                            value={formData.phoneNumber}
+                            onChangeText={(text) => handleInputChange('phoneNumber', text)}
+                        />
+                    </View>
+                    <View style={[styles.inputContainer, { backgroundColor: colors.secondaryBg }]}>
+                        <Icon name="lock" size={30} color={colors.color} />
+                        <TextInput
+                            style={[styles.input, { color: colors.color }]}
+                            placeholderTextColor={colors.secondaryColor}
+                            placeholder="Password"
+                            secureTextEntry={!showPassword} // Toggle password visibility
+                            value={formData.password}
+                            onChangeText={(text) => handleInputChange('password', text)}
+                        />
+                        <TouchableOpacity
+                            style={styles.eyeButton}
+                            onPress={() => setShowPassword(!showPassword)} // Toggle the password visibility
+                        >
+                            <Icon
+                                name={showPassword ? "visibility" : "visibility-off"}
+                                size={24}
+                                color={colors.color}
+                            />
+                        </TouchableOpacity>
+                    </View>
 
-          {/* sign up button  */}
-          <PrimaryButton title="Create New Account" handler={handleSignUp} />
+                    {/* sign up button  */}
+                    <PrimaryButton title="Create New Account" handler={handleSignUp} />
 
-          {/* Sign Up With Section */}
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 15 }}>
-            <View style={{ height: 1, width: '30%',backgroundColor:'black' }}></View>
-            <Text style={[styles.socialSignUpText]}>Sign Up With</Text>
-            <View style={{ height: 1, width: '30%',backgroundColor:'black'  }}></View>
-          </View>
-          <View style={styles.socialIconsContainer}>
-            <TouchableOpacity onPress={handleFacebookSignUp} style={styles.socialIconButton}>
-              <Icon name="facebook" size={30} color={'blue'} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleGoogleSignUp} style={styles.socialIconButton}>
-              <Icon name="google" size={30} color='black' />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleAppleSignUp} style={styles.socialIconButton}>
-              <Icon name="apple" size={30} color='black' />
-            </TouchableOpacity>
-          </View>
+                    {/* Sign Up With Section */}
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop:15  }}>
+                        <View style={{ height: 1, backgroundColor: colors.secondaryColor, width: '30%' }}></View>
+                        <Text style={[styles.socialSignUpText, { color: colors.secondaryColor }]}>Sign Up With</Text>
+                        <View style={{ height: 1, backgroundColor: colors.secondaryColor, width: '30%' }}></View>
+                    </View>
+                    <View style={styles.socialIconsContainer}>
+                        <TouchableOpacity onPress={handleFacebookSignUp} style={styles.socialIconButton}>
+                            <Icon name="facebook" size={30} color={'blue'} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handleGoogleSignUp} style={styles.socialIconButton}>
+                            <FAIcon name="google" size={30} color={colors.iconColor} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handleAppleSignUp} style={styles.socialIconButton}>
+                            <Icon name="apple" size={30} color={colors.iconColor} />
+                        </TouchableOpacity>
+                    </View>
 
-          <View style={styles.loginContainer}>
-            <Text style={[styles.loginText]}>Already have an account?</Text>
-            <TouchableOpacity
-              onPress={() => { navigation.navigate('LogIn') }}>
-              <Text style={[styles.loginButtonText]}>Log In</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </ImageBackground>
+                    <View style={styles.loginContainer}>
+                        <Text style={[styles.loginText, { color: colors.secondaryColor }]}>Already have an account?</Text>
+                        <TouchableOpacity
+                            onPress={() => { navigation.navigate('LogIn') }}>
+                            <Text style={[styles.loginButtonText, { color: colors.linkColor }]}>Log In</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+        </ImageBackground>
   );
 };
 

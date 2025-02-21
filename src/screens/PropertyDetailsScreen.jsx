@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import ThemeContext from '../theme/ThemeContext';
 
 const PropertyDetailsScreen = ({ navigation }) => {
+  const { colors } = useContext(ThemeContext)
   const [paymentOptions, setPaymentOptions] = useState({
     UPI: false,
     CreditCard: false,
@@ -16,50 +18,50 @@ const PropertyDetailsScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.iconButton}>
-          <Icon name="keyboard-arrow-left" size={24} color="black" />
+        <TouchableOpacity onPress={() => navigation.goBack()} style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
+          <Icon name="keyboard-arrow-left" size={24} color={colors.color} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Property Details</Text>
-        <TouchableOpacity style={styles.iconButton}
-        onPress={() => navigation.navigate('Notifications')}>
-          <Icon name="notifications-none" size={24} color="black" />
+        <Text style={[styles.headerTitle, { color: colors.color }]}>Property Details</Text>
+        <TouchableOpacity style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}
+          onPress={() => navigation.navigate('Notifications')}>
+          <Icon name="notifications-none" size={24} color={colors.color} />
         </TouchableOpacity>
       </View>
 
       <ScrollView style={styles.content}>
         {/* Form Fields */}
-        <Text style={styles.label}>Fill the Details</Text>
-        <TextInput style={styles.input} placeholder="Property Name" placeholderTextColor="#777" />
-        <TextInput style={styles.input} placeholder="Property Address" placeholderTextColor="#777" />
-        <TouchableOpacity style={styles.locationInput}>
-          <Text style={styles.placeholderText}>Location</Text>
-          <Text style={styles.linkText}>Visit Map</Text>
+        <Text style={[[styles.label, { color: colors.color }], { color: colors.color }]}>Fill the Details</Text>
+        <TextInput style={[styles.input, { color: colors.color, backgroundColor: colors.secondaryBg }]} placeholder="Property Name" placeholderTextColor={colors.secondaryColor} />
+        <TextInput style={[styles.input, { color: colors.color, backgroundColor: colors.secondaryBg }]} placeholder="Property Address" placeholderTextColor={colors.secondaryColor} />
+        <TouchableOpacity style={[styles.locationInput,{backgroundColor:colors.secondaryBg}]}>
+          <Text style={[styles.placeholderText,{color: colors.secondaryColor}]}>Location</Text>
+          <Text style={[styles.linkText,{color:colors.linkColor}]}>Visit Map</Text>
         </TouchableOpacity>
 
         {/* Features Section */}
-        <Text style={styles.label}>Features</Text>
+        <Text style={[[styles.label, { color: colors.color }], { color: colors.color }]}>Features</Text>
         {['City', 'Built In', 'Price per sqft'].map((feature, index) => (
           <View key={index} style={styles.featureRow}>
-            <Icon name="arrow-right" size={24} color="#000" style={styles.featureIcon} />
-            <Text style={styles.featureLabel}>{feature}</Text>
-            <TextInput style={styles.featureInput} placeholderTextColor="#777" />
+            <Icon name="arrow-right" size={24} color={colors.color} style={styles.featureIcon} />
+            <Text style={[styles.featureLabel,{color:colors.color}]}>{feature}</Text>
+            <TextInput style={[styles.featureInput,{color:colors.color}]} placeholderTextColor={colors.secondaryColor} />
           </View>
         ))}
 
         {/* Facilities & Services */}
-        <Text style={styles.label}>Facilities & Services</Text>
-        <TextInput style={[styles.input, { height: 80 }]} placeholderTextColor="#777" multiline />
+        <Text style={[styles.label, { color: colors.color }]}>Facilities & Services</Text>
+        <TextInput style={[[styles.input, { color: colors.color, backgroundColor: colors.secondaryBg }], { height: 80 }]} placeholderTextColor={colors.secondaryColor} multiline />
 
         {/* Payment Options */}
-        <Text style={styles.label}>Payment Options</Text>
+        <Text style={[styles.label, { color: colors.color }]}>Payment Options</Text>
         <View style={styles.paymentOptions}>
           {Object.keys(paymentOptions).map((option) => (
             <TouchableOpacity key={option} style={styles.checkboxContainer} onPress={() => togglePaymentOption(option)}>
-              <View style={[styles.checkbox, paymentOptions[option] && styles.checked]} />
-              <Text style={styles.checkboxText}>{option.replace(/([A-Z])/g, ' $1')}</Text>
+              <Icon name={paymentOptions[option]?'check-box':'check-box-outline-blank'} size={30} color={colors.color} />
+              <Text style={[styles.checkboxText,{color:colors.color}]}>{option.replace(/([A-Z])/g, ' $1')}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -68,9 +70,10 @@ const PropertyDetailsScreen = ({ navigation }) => {
       {/* Next Button */}
       <TouchableOpacity
        onPress={()=>{navigation.navigate('UploadScreen')}}
-       style={styles.nextButton}>
-        <Text style={styles.nextButtonText}>Next</Text>
-        <Icon name="chevron-right" size={24} color="white" />
+       style={[styles.nextButton,{backgroundColor:colors.buttonBg}]}>
+        <Text></Text>
+        <Text style={[styles.nextButtonText,{color:colors.buttonText}]}>Next</Text>
+        <Icon name="chevron-right" size={24} color={colors.buttonText} />
       </TouchableOpacity>
     </View>
   );
@@ -106,10 +109,8 @@ const styles = StyleSheet.create({
   featureInput: { flex: 1, fontSize: 14, color: '#000', borderBottomWidth: 1, borderBottomColor: '#ccc' },
   paymentOptions: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginVertical: 10 },
   checkboxContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 10, width: '48%' },
-  checkbox: { width: 20, height: 20, borderWidth: 1, borderColor: '#000', borderRadius: 4, marginRight: 8 },
-  checked: { backgroundColor: 'black' },
   checkboxText: { fontSize: 14 },
-  nextButton: { flexDirection: 'row', backgroundColor: 'black', padding: 12, borderRadius: 8, alignItems: 'center', justifyContent: 'center', margin: 20 },
+  nextButton: { flexDirection: 'row', backgroundColor: 'black', padding: 12, borderRadius: 8, alignItems: 'center', justifyContent: 'space-between', margin: 20 },
   nextButtonText: { color: 'white', fontSize: 16, marginRight: 5 },
 });
 

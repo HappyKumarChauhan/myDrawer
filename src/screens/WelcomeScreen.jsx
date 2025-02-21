@@ -2,26 +2,29 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
+import ThemeContext from '../theme/ThemeContext';
+
 
 const WelcomeScreen = ({ navigation }) => {
+    const {colors}=useContext(ThemeContext)
     return (
         <ImageBackground
             source={{ uri: 'https://cdn.decoist.com/wp-content/uploads/2015/08/Upholstered-daybed-for-the-contemporary-home-office.jpg' }}
             style={styles.background}
         >
-            <LinearGradient colors={['rgba(50, 65, 75, 0.7)', 'rgba(60, 100, 110, 0.7)']} style={styles.overlay}>
+            <LinearGradient colors={colors.layoutBgColors} style={styles.overlay}>
                 <View style={styles.main}>
                     <Text style={[styles.primaryHeading]}>Connect, Create and Collaborate</Text>
                     <Text style={[styles.secondaryHeading]}>The ultimate Co-working experience</Text>
                     <Text style={[styles.description]}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit, deleniti dolore aliquam aliquid quo odio laudantium minima illo mollitia libero necessitatibus quidem.</Text>
                     
                     <TouchableOpacity
-                        style={[styles.button]}
+                        style={[styles.button, {backgroundColor: colors.buttonBg}]}
                         onPress={() => navigation.navigate('SignUp')}
                     >
                         <Text></Text>
-                        <Text style={[styles.buttonText]}>Get Started</Text>
-                        <Icon name="navigate-next" size={30} color='black' />
+                        <Text style={[styles.buttonText,{color:colors.buttonText}]}>Get Started</Text>
+                        <Icon name="navigate-next" size={30} color={colors.buttonText} />
                     </TouchableOpacity>
 
                 </View>
