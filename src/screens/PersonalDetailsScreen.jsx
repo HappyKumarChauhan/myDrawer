@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc', 
+    borderColor: '#000000', 
     borderRadius: 8, 
     padding: 12, 
     marginVertical: 10, 
     borderBottomWidth: 1, 
-    borderBottomColor: '#ccc', 
+    borderBottomColor: '#000000', 
     shadowColor: '#000', 
     shadowOffset: { width: 0, height: 2 }, 
     shadowOpacity: 0.2, 
@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
     padding: 12, 
     borderRadius: 8, 
     alignItems: 'center', 
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginVertical: 10,
   },
   nextButtonText: {
     color: 'white',

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Platform } from "react-native";
 import Card from "../components/Card";
+import CardTwo from "../components/CardTwo"; 
 import ThemeContext from "../theme/ThemeContext";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -35,23 +36,29 @@ const DashboardScreen = ({ navigation }) => {
 
       <View style={styles.tabContainer}>
         <TouchableOpacity
-          style={[styles.tab, activeTab === "Upcoming" && styles.activeTab]}
+          style={[styles.tab, activeTab === "Upcoming" && { borderBottomColor: colors.color, borderBottomWidth: 2 }]}
           onPress={() => setActiveTab("Upcoming")}
         >
-          <Text style={[styles.tabText, activeTab === "Upcoming" && styles.activeTabText, { color: colors.color }]}>Upcoming</Text>
+          <Text style={[styles.tabText, { color: colors.color }]}>Upcoming</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.tab, activeTab === "My List" && styles.activeTab]}
+          style={[styles.tab, activeTab === "My List" && { borderBottomColor: colors.color, borderBottomWidth: 2 }]}
           onPress={() => setActiveTab("My List")}
         >
-          <Text style={[styles.tabText, activeTab === "My List" && styles.activeTabText, { color: colors.color }]}>My List</Text>
+          <Text style={[styles.tabText, { color: colors.color }]}>My List</Text>
         </TouchableOpacity>
       </View>
 
       <FlatList
         data={activeTab === "Upcoming" ? upcomingData : myListData}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Card title={item.title} desk={item.desk} />}
+        renderItem={({ item }) => 
+          activeTab === "Upcoming" ? (
+            <Card title={item.title} desk={item.desk} />
+          ) : (
+            <CardTwo title={item.title} desk={item.desk} />
+          )
+        }
         contentContainerStyle={{ padding: 10 }}
       />
     </View>
@@ -80,11 +87,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
-  activeTab: {
-    borderBottomWidth: 2,
-  },
-  activeTabText: {
-    fontWeight: "bold",
+  tabText: {
+    fontSize: 16,
   },
   iconButton: {
     width: 50,
@@ -94,12 +98,10 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginTop: Platform.OS === 'ios' ? 40 : 2,  // Adjust margin for iOS
     backgroundColor: 'white',
-    // Shadow for iOS
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
-    // Elevation for Android
     elevation: 5,
   },
 });

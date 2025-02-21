@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     paddingHorizontal: 8,
     borderWidth: 1,
-    borderColor: '#B8B8B8',
+    borderColor: '#000000',
     flexDirection: 'row',
     alignItems: 'center',
   },

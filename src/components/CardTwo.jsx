@@ -3,9 +3,9 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import ThemeContext from "../theme/ThemeContext";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons"; // Import MaterialIcons
+import MaterialIcons from "react-native-vector-icons/MaterialIcons"; 
 
-const Card = ({ title, desk }) => {
+const CardTwo = ({ title, desk }) => {
   const { colors } = useContext(ThemeContext);
   const navigation = useNavigation();
 
@@ -21,7 +21,7 @@ const Card = ({ title, desk }) => {
           <Text style={[styles.subText, { color: colors.secondaryColor }]}>For: Self</Text>
           <Text style={[styles.subText, { color: colors.secondaryColor }]}>Desk: {desk}</Text>
         </View>
-        <MaterialIcons name="keyboard-arrow-right" size={24} color="white" /> 
+        <MaterialIcons name="bookmark-border" size={24} color="white" /> 
       </LinearGradient>
     </TouchableOpacity>
   );
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default CardTwo;

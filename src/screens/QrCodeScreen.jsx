@@ -21,7 +21,7 @@ const QRCodeScreen = ({ navigation }) => {
 
       {/* QR Scanner Section */}
       <View style={styles.qrContainer}>
-        <View style={styles.qrBorder}>
+        <View style={[styles.qrBorder, {backgroundColor:colors.secondaryBg}]}>
           <View style={styles.qrInnerBox}>
             <Image 
               source={{ uri: "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=SampleQR" }} 
@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
   /* QR Code Section */
   qrContainer: { alignItems: "center", marginVertical: 20 },
   qrBorder: { 
-    width: 180, 
-    height: 180, 
+    width: 190, 
+    height: 190, 
     borderRadius: 90, 
-    backgroundColor: "#D3D3D3", 
+    // backgroundColor: "#D3D3D3", 
     justifyContent: "center", 
     alignItems: "center", 
     position: "relative"
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white", 
     justifyContent: "center", 
     alignItems: "center", 
-    borderRadius: 1
+    borderRadius: 7
   },
   qrImage: { width: 80, height: 80 },
 

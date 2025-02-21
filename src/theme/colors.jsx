@@ -1,7 +1,7 @@
 export const lightTheme = {
     sidePanelBgColors:['#0C1922','#115965'],
     layoutBgColors:['rgba(50, 65, 75, 0.7)', 'rgba(60, 100, 110, 0.7)'],
-    secondaryBg:'#f3f3f3',
+    secondaryBg:'#ffffff',
     color:'#0C1922',
     linkColor:'blue',
     transparentBg:'rgba(255,255,255,0.7)',
