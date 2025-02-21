@@ -1,15 +1,19 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Button, Image, StyleSheet, Pressable } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
+import DashboardScreen from '../screens/Dashboard';
+import MyTabs from './BottomTabNavigator';
+import ThemeContext from '../theme/ThemeContext';
 
 // Create the drawer navigator
 const Drawer = createDrawerNavigator();
 
 // Custom Drawer Component
 const CustomDrawerContent = (props) => {
+  const {colors}=useContext(ThemeContext)
   const menuItems = [
     { name: 'Home', icon: 'home', screen: 'Home' },
     { name: 'Profile', icon: 'person', screen: 'Profile' },
@@ -21,7 +25,7 @@ const CustomDrawerContent = (props) => {
   return (
     <View style={styles.drawerContainer}>
       <LinearGradient
-        colors={['#6C63FF', '#4A47A3']}
+        colors={colors.sidePanelBgColors}
         style={styles.drawerHeader}
       >
         <Image
@@ -104,14 +108,14 @@ const MyDrawer = () => {
       <Drawer.Navigator
         drawerContent={(props) => <CustomDrawerContent {...props} />}
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
           drawerType: 'slide',
           drawerStyle: {
-            width: '75%',
+            width: '90%',
           },
         }}
       >
-        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Home" component={MyTabs} />
         <Drawer.Screen name="Profile" component={ProfileScreen} />
         <Drawer.Screen name="Messages" component={MessagesScreen} />
         <Drawer.Screen name="Favorites" component={FavoritesScreen} />
