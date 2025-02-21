@@ -13,7 +13,8 @@ const KYCDetailsScreen = ({ navigation }) => {
                     <Icon name="keyboard-arrow-left" size={30} color={colors.color} />
                 </TouchableOpacity>
                 <Text style={[styles.topBarTitle, { color: colors.color, borderBottomColor: colors.color }]}>KYC Details</Text>
-                <TouchableOpacity style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
+                <TouchableOpacity style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}
+                onPress={() => navigation.navigate('Notifications')}>
                     <Icon name="notifications-none" size={24} color="black" />
                 </TouchableOpacity>
             </View>

@@ -118,9 +118,9 @@ const SignUpScreen = ({ navigation }) => {
 
           {/* Sign Up With Section */}
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 15 }}>
-            <View style={{ height: 1, width: '30%' }}></View>
+            <View style={{ height: 1, width: '30%',backgroundColor:'black' }}></View>
             <Text style={[styles.socialSignUpText]}>Sign Up With</Text>
-            <View style={{ height: 1, width: '30%' }}></View>
+            <View style={{ height: 1, width: '30%',backgroundColor:'black'  }}></View>
           </View>
           <View style={styles.socialIconsContainer}>
             <TouchableOpacity onPress={handleFacebookSignUp} style={styles.socialIconButton}>
@@ -227,13 +227,14 @@ const styles = StyleSheet.create({
   loginText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#0066AD',
+    
 
   },
   loginButtonText: {
     fontSize: 14,
     fontWeight: 'bold',
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
+    color: '#0066AD',
   }
 });
 

@@ -11,7 +11,8 @@ const PersonalDetailsScreen = ({ navigation }) => {
           <Icon name="keyboard-arrow-left" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Personal Details</Text>
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity style={styles.iconButton}
+        onPress={() => navigation.navigate('Notifications')}>
           <Icon name="notifications-none" size={24} color="black" />
         </TouchableOpacity>
       </View>
@@ -35,7 +36,7 @@ const PersonalDetailsScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: 'white', padding: 20 },
+  container: { flex: 1, backgroundColor: 'white', paddingHorizontal: 20 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
   headerTitle: { fontSize: 18, fontWeight: 'bold' },
   label: { fontSize: 16, fontWeight: 'bold', marginVertical: 15 },
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 8, padding: 12, marginVertical: 10 },
+  input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 8, padding: 12, marginVertical: 10,borderBottomWidth: 1, borderBottomColor: '#ccc', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 3, backgroundColor: '#f8f8f8', borderRadius: 8, elevation:5},
   nextButton: { flexDirection: 'row', backgroundColor: 'black', padding: 12, borderRadius: 8, alignItems: 'center', justifyContent: 'space-between' },
   nextButtonText: { color: 'white', fontSize: 16, marginRight: 5 },
 });

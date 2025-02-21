@@ -18,7 +18,8 @@ const UploadScreen = ({ navigation }) => {
           <Icon name="keyboard-arrow-left" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Upload</Text>
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity style={styles.iconButton}
+        onPress={() => navigation.navigate('Notifications')}>
           <Icon name="notifications-none" size={24} color="black" />
         </TouchableOpacity>
       </View>
@@ -60,7 +61,9 @@ const UploadScreen = ({ navigation }) => {
       />
 
       {/* Next Button */}
-      <TouchableOpacity style={styles.nextButton}>
+      <TouchableOpacity style={styles.nextButton}
+      onPress={() => navigation.navigate('Dash')}>
+        <Text></Text>
         <Text style={styles.nextButtonText}>Next</Text>
         <Icon name="chevron-right" size={24} color="white" />
       </TouchableOpacity>
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
   photoInfo: { flex: 1 },
   photoName: { fontSize: 14, fontWeight: 'bold' },
   photoSize: { fontSize: 12, color: '#777' },
-  nextButton: { flexDirection: 'row', backgroundColor: 'black', padding: 12, borderRadius: 8, alignItems: 'center', justifyContent: 'center', marginTop: 20 },
+  nextButton: { flexDirection: 'row', backgroundColor: 'black', padding: 12, borderRadius: 8, alignItems: 'center', justifyContent: 'space-between', marginTop: 20 },
   nextButtonText: { color: 'white', fontSize: 16, marginRight: 5 },
 });
 

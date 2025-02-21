@@ -89,9 +89,9 @@ const LogInScreen = ({ navigation }) => {
           />
 
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 15 }}>
-            <View style={{ height: 1, width: '30%' }}></View>
+            <View style={{ height: 1, width: '30%',backgroundColor:'black' }}></View>
             <Text style={[styles.socialSignInText]}>Sign In With</Text>
-            <View style={{ height: 1, width: '30%' }}></View>
+            <View style={{ height: 1, width: '30%',backgroundColor:'black' }}></View>
           </View>
           <View style={styles.socialIconsContainer}>
             <TouchableOpacity style={styles.socialIconButton}>
@@ -192,11 +192,12 @@ const styles = StyleSheet.create({
   signUpText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#0066AD',
+    
   },
   signUpButtonText: {
     fontSize: 14,
     fontWeight: 'bold',
+    color: '#0066AD',
   },
 });
 

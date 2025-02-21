@@ -23,7 +23,8 @@ const PropertyDetailsScreen = ({ navigation }) => {
           <Icon name="keyboard-arrow-left" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Property Details</Text>
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity style={styles.iconButton}
+        onPress={() => navigation.navigate('Notifications')}>
           <Icon name="notifications-none" size={24} color="black" />
         </TouchableOpacity>
       </View>
