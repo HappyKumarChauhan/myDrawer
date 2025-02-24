@@ -21,7 +21,7 @@ const QRCodeScreen = ({navigation}) => {
 
       {/* QR Scanner Section */}
       <View style={styles.qrContainer}>
-        <View style={[styles.qrBorder, {backgroundColor: colors.secondaryBg}]}>
+        <View style={[styles.qrBorder, {backgroundColor: colors.qrBorder}]}>
           <View style={styles.qrInnerBox}>
             <Image
               source={{

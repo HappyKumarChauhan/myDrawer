@@ -15,6 +15,7 @@ import VerificationScreen from '../screens/VerificationCodeScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import PasswordSuccessScreen from '../screens/PasswordSuccessScreen';
 import MyTabs from './BottomTabNavigator';
+import MyDrawer from './MyDrawer';
 
 const Stack = createStackNavigator();
 
@@ -25,13 +26,13 @@ const AppNavigator = () => {
         <Stack.Navigator initialRouteName="Welcome">
           <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
           <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="Dashboard" component={MyTabs} options={{ headerShown: false }} />
+          <Stack.Screen name="Dashboard" component={MyDrawer} options={{ headerShown: false }} />
           <Stack.Screen name="LogIn" component={LoginScreen} options={{ headerShown: false }} />
           <Stack.Screen name="PersonalDetails" component={PersonalDetailsScreen} options={{ headerShown: false }} />
           <Stack.Screen name="KYCDetails" component={KYCDetailsScreen} options={{ headerShown: false }} />
           <Stack.Screen name="PropertyDetails" component={PropertyDetailsScreen} options={{ headerShown: false }} />
           <Stack.Screen name="UploadScreen" component={UploadScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="Dash" component={MyTabs} options={{ headerShown: false }} />
+          {/* <Stack.Screen name="Dash" component={MyDrawer} options={{ headerShown: false }} /> */}
           <Stack.Screen name="Notifications" component={NotificationScreen} options={{ headerShown: false }} />
           <Stack.Screen name="QrCode" component={QRCodeScreen} options={{ headerShown: false }} />
           <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{ headerShown: false }} />

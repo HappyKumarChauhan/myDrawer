@@ -3,6 +3,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ThemeContext from '../theme/ThemeContext';
 import {useContext} from 'react';
 import DashboardScreen from '../screens/Dashboard';
+import QRCodeScreen from '../screens/QrCodeScreen';
+import PersonalDetailsScreen from '../screens/PersonalDetailsScreen';
+import UploadScreen from '../screens/UploadScreen';
+
 const Tab = createBottomTabNavigator();
 function MyTabs() {
   const {colors} = useContext(ThemeContext);
@@ -47,7 +51,7 @@ function MyTabs() {
       /> */}
       {/* <Tab.Screen
         name="QrCodeScanner"
-        component={Dashboard} // Custom component for the screen
+        component={QrCodeScreen} // Custom component for the screen
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="qr-code-scanner" size={30} color="white" />
@@ -64,16 +68,16 @@ function MyTabs() {
           },
         }}
       /> */}
-      {/* <Tab.Screen
-        name="Meeting"
-        component={RoomSpaceScreen}
+      <Tab.Screen
+        name="Upload"
+        component={UploadScreen}
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="meeting-room" size={30} color={color} />
           ),
         }}
-      /> */}
-      {/* <Tab.Screen
+      />
+      <Tab.Screen
         name="Profile"
         component={PersonalDetailsScreen}
         options={{
@@ -81,7 +85,7 @@ function MyTabs() {
             <Icon name="person-outline" size={30} color={color} />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 }

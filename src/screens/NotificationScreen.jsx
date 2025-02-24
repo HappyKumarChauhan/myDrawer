@@ -20,7 +20,7 @@ const NotificationScreen = ({ navigation }) => {
       <View style={styles.header}>
         <Text style={styles.title}>Notifications</Text>
         <TouchableOpacity style={[styles.closeButton,{backgroundColor:colors.iconSecondary}]} onPress={() => navigation.goBack()}>
-          <Icon name="close" size={30} color={colors.color} />
+          <Icon name="close" size={30} color= 'white' />
         </TouchableOpacity>
       </View>
 

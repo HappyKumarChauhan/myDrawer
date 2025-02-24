@@ -12,7 +12,7 @@ const Header = ({navigation, title}) => {
                 <Icon name="keyboard-arrow-left" size={30} color={colors.color} />
             </TouchableOpacity>
             <Text style={[styles.headerTitle, { color: colors.color }]}>{title}</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Notification')} style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
+            <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
                 <Icon name="notifications" size={30} color={colors.color} />
             </TouchableOpacity>
         </View>

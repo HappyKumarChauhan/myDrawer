@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Platform } from "react-native";
 import Card from "../components/Card";
-import CardTwo from "../components/CardTwo"; 
+import CardTwo from "../components/CardTwo";
 import ThemeContext from "../theme/ThemeContext";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import MyDrawer from "../navigation/MyDrawer";
 import Header from "../components/Header";
 
 const DashboardScreen = ({ navigation }) => {
@@ -23,9 +24,17 @@ const DashboardScreen = ({ navigation }) => {
   ];
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}> 
-      
-      <Header title="Dashboard" navigation={navigation} />
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.openDrawer()} style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
+          <Icon name="menu" size={30} color={colors.color} />
+        </TouchableOpacity>
+        <Text style={[styles.headerTitle, { color: colors.color }]}>Dashboard</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
+          <Icon name="notifications" size={30} color={colors.color} />
+        </TouchableOpacity>
+      </View>
 
       <View style={styles.tabContainer}>
         <TouchableOpacity
@@ -45,7 +54,7 @@ const DashboardScreen = ({ navigation }) => {
       <FlatList
         data={activeTab === "Upcoming" ? upcomingData : myListData}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => 
+        renderItem={({ item }) =>
           activeTab === "Upcoming" ? (
             <Card title={item.title} desk={item.desk} />
           ) : (
@@ -66,12 +75,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
   },
-  tab: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 1,
   },
-  tabText: {
-    fontSize: 16,
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    flex: 1,
+    textAlign: 'center',
+    marginTop: 25,
   },
   iconButton: {
     width: 50,
@@ -79,13 +95,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50,
-    marginTop: Platform.OS === 'ios' ? 40 : 2,  // Adjust margin for iOS
+    marginTop: Platform.OS === 'ios' ? 40 : 20,  // Adjust margin for iOS
     backgroundColor: 'white',
+    // Shadow for iOS
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
+    // Elevation for Android
     elevation: 5,
+  },
+  tab: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  tabText: {
+    fontSize: 16,
   },
 });
 
