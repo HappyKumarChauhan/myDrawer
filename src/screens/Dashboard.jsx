@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import CardTwo from "../components/CardTwo"; 
 import ThemeContext from "../theme/ThemeContext";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import Header from "../components/Header";
 
 const DashboardScreen = ({ navigation }) => {
   const { colors } = useContext(ThemeContext);
@@ -23,16 +24,8 @@ const DashboardScreen = ({ navigation }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}> 
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
-          <Icon name="keyboard-arrow-left" size={24} color={colors.iconColor} />
-        </TouchableOpacity>
-        <Text style={[styles.headerTitle, { color: colors.color }]}>Dashboard</Text>
-        <TouchableOpacity style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}
-        onPress={() => navigation.navigate('Notifications')}>
-          <Icon name="notifications-none" size={24} color={colors.iconColor} />
-        </TouchableOpacity>
-      </View>
+      
+      <Header title="Dashboard" navigation={navigation} />
 
       <View style={styles.tabContainer}>
         <TouchableOpacity
@@ -68,16 +61,6 @@ const DashboardScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 15,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
   },
   tabContainer: {
     flexDirection: "row",

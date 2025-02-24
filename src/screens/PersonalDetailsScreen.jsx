@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ThemeContext from '../theme/ThemeContext';
+import Header from '../components/Header';
 
 const PersonalDetailsScreen = ({ navigation }) => {
   const { colors } = useContext(ThemeContext)
@@ -9,17 +10,9 @@ const PersonalDetailsScreen = ({ navigation }) => {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Custom Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
-          <Icon name="keyboard-arrow-left" size={24} color={colors.color} />
-        </TouchableOpacity>
-        <Text style={[styles.headerTitle, { color: colors.color }]}>Personal Details</Text>
-        <TouchableOpacity style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}
-          onPress={() => navigation.navigate('Notifications')}>
-          <Icon name="notifications-none" size={24} color={colors.color} />
-        </TouchableOpacity>
-      </View>
+      <Header title="Personal Details" navigation={navigation} />
 
+      <View style={styles.formContainer}>
       {/* Form Section */}
       <Text style={[styles.label, { color: colors.color }]}>Fill the Details</Text>
       {["Your Name", "Your Email", "Contact Number", "Date of birth", "Address", "City", "Pincode"].map((placeholder, index) => (
@@ -34,6 +27,7 @@ const PersonalDetailsScreen = ({ navigation }) => {
         <Text style={[styles.nextButtonText, { color: colors.buttonText }]}>Next</Text>
         <Icon name="chevron-right" size={24} color={colors.buttonText} />
       </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -41,17 +35,9 @@ const PersonalDetailsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 10
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: 'bold'
+  formContainer:{
+    marginHorizontal:20
   },
   label: {
     fontSize: 16,

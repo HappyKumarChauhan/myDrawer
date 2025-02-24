@@ -2,23 +2,15 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ThemeContext from '../theme/ThemeContext';
+import Header from '../components/Header';
 
 const KYCDetailsScreen = ({ navigation }) => {
     const { colors } = useContext(ThemeContext);
     return (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
             {/* Back Icon and Title */}
-            <View style={styles.topBar}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}>
-                    <Icon name="keyboard-arrow-left" size={30} color={colors.color} />
-                </TouchableOpacity>
-                <Text style={[styles.topBarTitle, { color: colors.color, borderBottomColor: colors.color }]}>KYC Details</Text>
-                <TouchableOpacity style={[styles.iconButton, { backgroundColor: colors.secondaryBg }]}
-                onPress={() => navigation.navigate('Notifications')}>
-                    <Icon name="notifications-none" size={24} color={colors.color} />
-                </TouchableOpacity>
-            </View>
-
+            <Header title="KYC Details" navigation={navigation}/>
+            <View style={styles.main}>
             {/* Identity Type Options */}
             <Text style={[styles.sectionTitle, { color: colors.color }]}>Choose Your Identity Type</Text>
             <View style={styles.identityOptions}>
@@ -65,6 +57,7 @@ const KYCDetailsScreen = ({ navigation }) => {
                 style={[styles.submitButton, { backgroundColor: colors.buttonBg }]}>
                 <Text style={[styles.submitButtonText, { color: colors.buttonText }]}>Submit</Text>
             </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -72,24 +65,9 @@ const KYCDetailsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
     },
-    topBar: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent:'space-between',
-        marginBottom: 50,
-    },
-    topBarTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginTop: 2,
-        color: '#000',
-        // borderBottomWidth: 1,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 3,
+    main:{
+        padding:20
     },
     sectionTitle: {
         fontSize: 18,
@@ -102,7 +80,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 30,
-        // gap : 5
     },
     identityButton: {
         paddingVertical: 10,
