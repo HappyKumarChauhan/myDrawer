@@ -1,63 +1,96 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ThemeContext from '../theme/ThemeContext';
 import Header from '../components/Header';
+import CameraModal from '../components/CameraModal';
 
 const KYCDetailsScreen = ({ navigation }) => {
     const { colors } = useContext(ThemeContext);
+    const [isCameraVisible, setIsCameraVisible] = useState(false);
+    const [cameraMode, setCameraMode] = useState('selfie'); // 'selfie' or 'id_card'
+    const [capturedSelfie, setCapturedSelfie] = useState(null);
+    const [capturedIdCard, setCapturedIdCard] = useState(null);
+    const handleCapture = (photo, mode) => {
+        if (mode === 'selfie') {
+            setCapturedSelfie(photo);
+        } else {
+            setCapturedIdCard(photo);
+        }
+    };
     return (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
             {/* Back Icon and Title */}
-            <Header title="KYC Details" navigation={navigation}/>
+            <Header title="KYC Details" navigation={navigation} />
             <View style={styles.main}>
-            {/* Identity Type Options */}
-            <Text style={[styles.sectionTitle, { color: colors.color }]}>Choose Your Identity Type</Text>
-            <View style={styles.identityOptions}>
-                <TouchableOpacity style={[styles.identityButton, { backgroundColor: colors.secondaryBg, borderColor: colors.secondaryColor }]}>
-                    <Text style={[styles.identityButtonText, { color: colors.secondaryColor }]}>Aadhar Card</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.identityButton, { backgroundColor: colors.secondaryBg, borderColor: colors.secondaryColor }]}>
-                    <Text style={[styles.identityButtonText, { color: colors.secondaryColor }]}>Pan Card</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.identityButton, { backgroundColor: colors.secondaryBg, borderColor: colors.secondaryColor }]}>
-                    <Text style={[styles.identityButtonText, { color: colors.secondaryColor }]}>Driving License</Text>
-                </TouchableOpacity>
-            </View>
-
-            {/* Upload Proof Identity */}
-            <View style={[styles.uploadSection, { backgroundColor: colors.secondaryBg }]}>
-                <View style={styles.uploadTextContainer}>
-                    <Text style={[styles.cardTitle, { color: colors.color }]}>Upload Proof Identity</Text>
-                    <Text style={[styles.cardDescription, { color: colors.secondaryColor }]}>
-                        We accept only ID card, Driving License, or Passport
-                    </Text>
+                {/* Identity Type Options */}
+                <Text style={[styles.sectionTitle, { color: colors.color }]}>Choose Your Identity Type</Text>
+                <View style={styles.identityOptions}>
+                    <TouchableOpacity style={[styles.identityButton, { backgroundColor: colors.secondaryBg, borderColor: colors.secondaryColor }]}>
+                        <Text style={[styles.identityButtonText, { color: colors.secondaryColor }]}>Aadhar Card</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.identityButton, { backgroundColor: colors.secondaryBg, borderColor: colors.secondaryColor }]}>
+                        <Text style={[styles.identityButtonText, { color: colors.secondaryColor }]}>Pan Card</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.identityButton, { backgroundColor: colors.secondaryBg, borderColor: colors.secondaryColor }]}>
+                        <Text style={[styles.identityButtonText, { color: colors.secondaryColor }]}>Driving License</Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={[styles.uploadButton, { borderColor: colors.color }]}>
-                    <Icon name="image" size={30} color={colors.color} />
-                </TouchableOpacity>
-            </View>
 
-            {/* Selfie Photo */}
-            <TouchableOpacity onPress={() => { navigation.navigate('KYCVerification') }} style={[styles.uploadSection, { backgroundColor: colors.secondaryBg }]}>
-                <View style={styles.uploadTextContainer}>
-                    <Text style={[styles.cardTitle, { color: colors.color }]}>Selfie Photo</Text>
-                    <Text style={[styles.cardDescription, { color: colors.secondaryColor }]}>
-                        Selfie with your front camera to verify your identity
-                    </Text>
+                {/* Upload Proof Identity */}
+                <View style={[styles.uploadSection, { backgroundColor: colors.secondaryBg }]}>
+                    <View style={styles.uploadTextContainer}>
+                        <Text style={[styles.cardTitle, { color: colors.color }]}>Upload Proof Identity</Text>
+                        <Text style={[styles.cardDescription, { color: colors.secondaryColor }]}>
+                            We accept only ID card, Driving License, or Passport
+                        </Text>
+                    </View>
+                    <TouchableOpacity style={[styles.uploadButton, { borderColor: colors.color }]}
+                        onPress={() => {
+                            setCameraMode('id_card');
+                            setIsCameraVisible(true);
+                        }}>
+                        {capturedIdCard ? (<Image
+                            source={{ uri: `file://${capturedIdCard.path}` }}
+                            style={styles.image}
+                        />) : (<Icon name="image" size={30} color={colors.color} />)}
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={[styles.uploadButton, { borderColor: colors.color }]}>
-                    <Icon name="camera-alt" size={30} color={colors.color} />
-                </TouchableOpacity>
-            </TouchableOpacity>
 
-            {/* Submit Button */}
-            <TouchableOpacity
-                onPress={() => { navigation.navigate('LogIn') }}
-                style={[styles.submitButton, { backgroundColor: colors.buttonBg }]}>
-                <Text style={[styles.submitButtonText, { color: colors.buttonText }]}>Submit</Text>
-            </TouchableOpacity>
+                {/* Selfie Photo */}
+                <View
+                    style={[styles.uploadSection, { backgroundColor: colors.secondaryBg }]}>
+                    <View style={styles.uploadTextContainer}>
+                        <Text style={[styles.cardTitle, { color: colors.color }]}>Selfie Photo</Text>
+                        <Text style={[styles.cardDescription, { color: colors.secondaryColor }]}>
+                            Selfie with your front camera to verify your identity
+                        </Text>
+                    </View>
+                    <TouchableOpacity style={[styles.uploadButton, { borderColor: colors.color }]}
+                        onPress={() => {
+                            setCameraMode('selfie');
+                            setIsCameraVisible(true);
+                        }}>
+                        {capturedSelfie ? (<Image
+                            source={{ uri: `file://${capturedSelfie.path}` }}
+                            style={styles.image}
+                        />) : (<Icon name="camera-alt" size={30} color={colors.color} />)}
+                    </TouchableOpacity>
+                </View>
+
+                {/* Submit Button */}
+                <TouchableOpacity
+                    onPress={() => { navigation.navigate('LogIn') }}
+                    style={[styles.submitButton, { backgroundColor: colors.buttonBg }]}>
+                    <Text style={[styles.submitButtonText, { color: colors.buttonText }]}>Submit</Text>
+                </TouchableOpacity>
             </View>
+            <CameraModal
+                visible={isCameraVisible}
+                onClose={() => setIsCameraVisible(false)}
+                onCapture={handleCapture}
+                mode={cameraMode}
+            />
         </View>
     );
 };
@@ -66,8 +99,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    main:{
-        padding:20
+    main: {
+        padding: 20
     },
     sectionTitle: {
         fontSize: 18,
@@ -80,6 +113,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 30,
+        flexWrap: 'wrap',
     },
     identityButton: {
         paddingVertical: 10,
@@ -130,17 +164,20 @@ const styles = StyleSheet.create({
     },
     uploadButton: {
         alignSelf: 'center',  // Center the button
-        padding: 20,
+        height:100,
+        width:100,
         borderWidth: 1,
         borderColor: '#000000',
         borderRadius: 8,
-        width: '30%',  // Size increased to 30% of the row
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
         flexDirection: 'row',
         borderStyle: 'dashed',
-
+    },
+    image:{
+        width:'100%',
+        height:'100%'
     },
     submitButton: {
         backgroundColor: '#000',
@@ -149,7 +186,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 'auto',  // Only takes width according to button length
         alignSelf: 'center',  // Center the button
-        paddingHorizontal: 50,  // Adjust padding horizontally based on text length
+        width: '100%'
     },
     submitButtonText: {
         color: '#fff',
