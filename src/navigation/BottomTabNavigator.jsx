@@ -4,8 +4,8 @@ import ThemeContext from '../theme/ThemeContext';
 import {useContext} from 'react';
 import DashboardScreen from '../screens/Dashboard';
 import QRCodeScreen from '../screens/QrCodeScreen';
-import PersonalDetailsScreen from '../screens/PersonalDetailsScreen';
 import UploadScreen from '../screens/UploadScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -79,7 +79,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Profile"
-        component={PersonalDetailsScreen}
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="person-outline" size={30} color={color} />

@@ -1,12 +1,15 @@
 import React from 'react';
 import AppNavigator from './src/navigation/StackNavigator';
 import ThemeProvider from './src/theme/ThemeProvider';
+import { UserProvider } from './src/context/UserContext';
 
 const App = () => {
   return (
-  <ThemeProvider>
-  <AppNavigator />;
-  </ThemeProvider>
+    <UserProvider>
+      <ThemeProvider>
+        <AppNavigator />;
+      </ThemeProvider>
+    </UserProvider>
   );
 };
 

@@ -1,31 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ImageBackground, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import ThemeContext from '../theme/ThemeContext';
 import Main from '../components/login/Main'
+import { UserContext } from '../context/UserContext';
 
 const LogInScreen = ({ navigation }) => {
-
-  const handleLogin = async () => {
-    // if (!email || !password) {
-    //     Alert.alert('Error', 'Please fill in all fields.');
-    //     return;
-    // }
-    // try {
-    //     const response = await axios.post('/user/login', { email, password, rememberMe });
-    //     if (response.status === 200) {
-    //         Alert.alert('Success', 'Logged in successfully!');
-    //         navigation.navigate('Dashboard');
-    //     } else {
-    //         Alert.alert('Error', 'Invalid credentials, please try again.');
-    //     }
-    // } catch (error) {
-    //     Alert.alert('Error', 'Something went wrong. Please try again later.');
-    //     console.error(error);
-    // }
-    navigation.navigate('PropertyDetails');
-  };
-
+  const {user}=useContext(UserContext)
+  useEffect(() => {
+    if(user){
+      navigation.replace('Dashboard')
+    }
+  }, [])
+  
 
   return (
     <ImageBackground
