@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -15,10 +15,11 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import ThemeContext from '../theme/ThemeContext';
 import Header from '../components/Header';
 
-const UploadScreen = ({ navigation }) => {
+const UploadScreen = ({ navigation,route }) => {
   const { colors } = useContext(ThemeContext);
   const [photos, setPhotos] = useState([]);
-
+  const {propertyId} =route.params;
+  
   // Request Camera Permission
   const requestCameraPermission = async () => {
     if (Platform.OS === 'android') {

@@ -6,13 +6,30 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ThemeContext from '../theme/ThemeContext';
 import Header from '../components/Header';
+import RadioGroup from 'react-native-radio-buttons-group';
+import axios from '../config/axios';
+import LoadingModal from '../components/LoadingModal';
 
 const PropertyDetailsScreen = ({navigation}) => {
   const {colors} = useContext(ThemeContext);
+  const [propertyName, setPropertyName] = useState('');
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
+  const [price, setPrice] = useState('');
+  const [facilities, setFacilities] = useState({
+    Wifi: false,
+    Parking: false,
+    AC: false,
+    PowerBackup: false,
+    Security: false,
+    ConferenceRoom: false,
+  });
+  const [loading, setLoading] = useState(false)
   const [paymentOptions, setPaymentOptions] = useState({
     UPI: false,
     CreditCard: false,
@@ -20,9 +37,49 @@ const PropertyDetailsScreen = ({navigation}) => {
     PaperChecks: false,
     DebitCard: false,
   });
-
+  const rentalOptions = [
+    {id: '1', label: 'Daily', value: 'Daily', color: colors.color},
+    {id: '2', label: 'Monthly', value: 'Monthly', color: colors.color},
+  ];
+  const [rentalType, setRentalType] = useState(null);
   const togglePaymentOption = option => {
     setPaymentOptions(prev => ({...prev, [option]: !prev[option]}));
+  };
+  const toggleFacility = facility => {
+    setFacilities(prev => ({...prev, [facility]: !prev[facility]}));
+  };
+  const handleSubmit = async () => {
+    if (!propertyName || !description || !location || !price) {
+      Alert.alert('Error', 'Please fill all fields');
+      return;
+    }
+    setLoading(true)
+    const selectedFacilities = Object.keys(facilities).filter(
+      key => facilities[key],
+    );
+
+    const data = {
+      title: propertyName,
+      description,
+      location,
+      price,
+      rentalType, // Make sure this is not null
+      amenities: selectedFacilities,
+    };
+
+    try {
+      const response = await axios.post('/properties', data, {
+        headers: {'Content-Type': 'application/json'},
+      });
+      const propertyId=response.data.property._id;
+      Alert.alert('Success', 'Property has been added.');
+      navigation.navigate('UploadScreen',{propertyId}); // Navigate to the next screen
+    } catch (error) {
+      console.error('Error submitting form:', error.message);
+      Alert.alert('Error', 'Failed to submit property details');
+    } finally{
+      setLoading(false)
+    }
   };
 
   return (
@@ -44,16 +101,41 @@ const PropertyDetailsScreen = ({navigation}) => {
           ]}
           placeholder="Property Name"
           placeholderTextColor={colors.secondaryColor}
+          value={propertyName}
+          onChangeText={setPropertyName}
         />
         <TextInput
           style={[
             styles.input,
             {color: colors.color, backgroundColor: colors.secondaryBg},
           ]}
-          placeholder="Property Address"
+          placeholder="Description"
           placeholderTextColor={colors.secondaryColor}
+          value={description}
+          onChangeText={setDescription}
         />
-        <TouchableOpacity
+        <TextInput
+          style={[
+            styles.input,
+            {color: colors.color, backgroundColor: colors.secondaryBg},
+          ]}
+          placeholder="Location"
+          placeholderTextColor={colors.secondaryColor}
+          value={location}
+          onChangeText={setLocation}
+        />
+        <TextInput
+          style={[
+            styles.input,
+            {color: colors.color, backgroundColor: colors.secondaryBg},
+          ]}
+          placeholder="Price"
+          placeholderTextColor={colors.secondaryColor}
+          keyboardType="numeric"
+          value={price}
+          onChangeText={setPrice}
+        />
+        {/* <TouchableOpacity
           style={[styles.locationInput, {backgroundColor: colors.secondaryBg}]}
         >
           <Text
@@ -64,9 +146,31 @@ const PropertyDetailsScreen = ({navigation}) => {
           <Text style={[styles.linkText, {color: colors.linkColor}]}>
             Visit Map
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-        {/* Features Section */}
+        <Text
+          style={[[styles.label, {color: colors.color}], {color: colors.color}]}
+        >
+          Rental Type
+        </Text>
+        <RadioGroup
+          labelStyle={{color: colors.color}}
+          radioButtons={rentalOptions}
+          onPress={id => {
+            const selectedOption = rentalOptions.find(
+              button => button.id === id,
+            );
+            setRentalType(selectedOption ? selectedOption.value : null);
+          }}
+          selectedId={
+            rentalType
+              ? rentalOptions.find(btn => btn.value === rentalType)?.id
+              : null
+          }
+          containerStyle={styles.radioGroup}
+        />
+
+        {/* Features Section
         <Text
           style={[[styles.label, {color: colors.color}], {color: colors.color}]}
         >
@@ -88,25 +192,34 @@ const PropertyDetailsScreen = ({navigation}) => {
               placeholderTextColor={colors.secondaryColor}
             />
           </View>
-        ))}
+        ))} */}
 
         {/* Facilities & Services */}
         <Text style={[styles.label, {color: colors.color}]}>
           Facilities & Services
         </Text>
-        <TextInput
-          style={[
-            [
-              styles.input,
-              {color: colors.color, backgroundColor: colors.secondaryBg},
-            ],
-            {height: 80},
-          ]}
-          placeholderTextColor={colors.secondaryColor}
-          multiline
-        />
+        <View style={styles.facilitiesContainer}>
+          {Object.keys(facilities).map(facility => (
+            <TouchableOpacity
+              key={facility}
+              style={styles.facilityOption}
+              onPress={() => toggleFacility(facility)}
+            >
+              <Icon
+                name={
+                  facilities[facility] ? 'check-box' : 'check-box-outline-blank'
+                }
+                size={24}
+                color={colors.color}
+              />
+              <Text style={[styles.facilityText, {color: colors.color}]}>
+                {facility}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
-        {/* Payment Options */}
+        {/* Payment Options
         <Text style={[styles.label, {color: colors.color}]}>
           Payment Options
         </Text>
@@ -131,14 +244,12 @@ const PropertyDetailsScreen = ({navigation}) => {
               </Text>
             </TouchableOpacity>
           ))}
-        </View>
+        </View> */}
       </ScrollView>
 
       {/* Next Button */}
       <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('UploadScreen');
-        }}
+        onPress={handleSubmit}
         style={[styles.nextButton, {backgroundColor: colors.buttonBg}]}
       >
         <Text></Text>
@@ -147,6 +258,7 @@ const PropertyDetailsScreen = ({navigation}) => {
         </Text>
         <Icon name="chevron-right" size={24} color={colors.buttonText} />
       </TouchableOpacity>
+      <LoadingModal visible={loading} message='Adding...'/>
     </View>
   );
 };
@@ -203,6 +315,11 @@ const styles = StyleSheet.create({
   linkText: {
     color: '#007BFF',
   },
+  radioGroup: {
+    flexDirection: 'row',
+    gap:10,
+    marginBottom: 15,
+  },
   featureRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -238,6 +355,21 @@ const styles = StyleSheet.create({
   },
   checkboxText: {
     fontSize: 14,
+  },
+  facilitiesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginVertical: 10,
+  },
+  facilityOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '48%',
+    marginBottom: 10,
+  },
+  facilityText: {
+    fontSize: 14,
+    marginLeft: 5,
   },
   nextButton: {
     flexDirection: 'row',
